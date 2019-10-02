@@ -190,6 +190,8 @@ namespace best012.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("BookType");
+
                     b.Property<string>("Name")
                         .IsRequired();
 

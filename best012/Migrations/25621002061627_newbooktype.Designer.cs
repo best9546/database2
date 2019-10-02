@@ -10,8 +10,8 @@ using best012.Data;
 namespace best012.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("25620923131857_Update2")]
-    partial class Update2
+    [Migration("25621002061627_newbooktype")]
+    partial class newbooktype
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -191,6 +191,8 @@ namespace best012.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("BookType");
 
                     b.Property<string>("Name")
                         .IsRequired();

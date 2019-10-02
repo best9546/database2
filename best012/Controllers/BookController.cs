@@ -25,13 +25,14 @@ namespace best012.Controllers
             var model = await _Context.Books.ToListAsync();
             return View(model);
         }
-        [Authorize]
+        [Authorize(Roles = "User")]
         public IActionResult AddBook()
         {
             return View();
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "User")]
         public async Task<IActionResult> AddBook(Book model)
         {
             if (ModelState.IsValid)
@@ -52,8 +53,8 @@ namespace best012.Controllers
             return View(model);
            
         }
-
-            public async Task<IActionResult> BookEdit(int Id)
+        [Authorize(Roles = "User")]
+        public async Task<IActionResult> BookEdit(int Id)
             {
                 var book = await _Context.Books.FirstOrDefaultAsync(prayuth => prayuth.Id == Id);
                 if(book == null)
@@ -77,6 +78,7 @@ namespace best012.Controllers
                 {
                     book.Name = model.Name;
                     book.Price = model.Price;
+                    book.BookType = model.BookType;
                     await _Context.SaveChangesAsync();
                 }
                 return RedirectToAction("Index");
@@ -84,7 +86,7 @@ namespace best012.Controllers
             return View(model);
                 
         }
-        [Authorize]
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> BookDelete(int Id)
         {
             var book = await _Context.Books.FirstOrDefaultAsync(prayuth => prayuth.Id == Id);
